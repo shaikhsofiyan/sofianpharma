@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+	<link rel="stylesheet" href="css/bootstrap-grid.min.css">
+	<link rel="stylesheet" href="css/theme-default.css">
+	<link rel="stylesheet" href="css/paymentfont.min.css">
+	<link rel="stylesheet" href="css/ionicons.min.css">
+	<link rel="stylesheet" href="css/main.css">
+
+	<!-- Favicons -->
+	<link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
+	<link rel="apple-touch-icon" href="icon/favicon-32x32.png">
+
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="Dmitry Volkov">
+	<title>SofiyanPharma – Coronavirus Medical Prevention, Online Pharmacy Template</title>
+
+</head>
+<body>
+	<!-- app -->
+	<div id="app">
+		<!-- header -->
+		<header class="header">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="header__content">
+							<a v-scroll-to="'#home'" href="#">
+								<img src="img/logo.png" alt="" style="height: 60px;">
+							</a>
+
+							<nav class="header__nav">
+								<a v-scroll-to="'#catalog'" href="#">Catalog</a>
+								<a v-scroll-to="'#cart'" href="#">Cart</a>
+								<a v-scroll-to="'#checkout'" href="#">Checkout</a>
+								<a v-scroll-to="'#about'" href="#">About</a>
+							</nav>
+
+							<div class="header__wrap">
+								<div class="header__phone">
+									<a href="tel:88001234567">8 800 123 45 67</a>
+									<span>The call is free</span>
+								</div>
+
+								<a v-scroll-to="'#cart'" href="#" class="header__cart">
+									<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><circle cx="176" cy="416" r="16" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></circle><circle cx="400" cy="416" r="16" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></circle><polyline points="48 80 112 80 160 352 416 352" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></polyline><path d="M160,288H409.44a8,8,0,0,0,7.85-6.43l28.8-144a8,8,0,0,0-7.85-9.57H128" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path></svg>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- end header -->
+
+		<!-- home -->
+		<section class="section section--home" id="home">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="home">
+							<div class="row">
+								<div class="col-12 col-sm-11 col-md-8 col-lg-6">
+									<div class="home__content">
+										<h1 class="home__title">Coronavirus<br> Medical Prevention</h1>
+										<p class="home__text">SofiyanPharma is a good choice for all medical facilities, online pharmacy, raise awareness of (2019-nCoV).</p>
+										<a v-scroll-to="'#catalog'" href="#" class="home__btn">PROTECT MYSELF</a>
+									</div>
+								</div>
+							</div>		
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- end home -->
+
+		<!-- section -->
+		<section class="section" id="catalog">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<!-- section title -->
+						<h2 class="section__title">Catalog</h2>
+						<!-- end section title -->
+
+						<!-- section sort -->
+						<div class="section__sort">
+							<button :class="{ active: currentFilter === 'all' }" @click="setFilter('all')" type="button">All</button>
+							<button :class="{ active: currentFilter === 'cat1' }" @click="setFilter('cat1')" type="button">Medical masks</button>
+							<button :class="{ active: currentFilter === 'cat2' }" @click="setFilter('cat2')" type="button">Antiseptics</button>
+							<button :class="{ active: currentFilter === 'cat3' }" @click="setFilter('cat3')" type="button">Medical gloves</button>
+							<button :class="{ active: currentFilter === 'cat4' }" @click="setFilter('cat4')" type="button">Drugs</button>
+						</div>
+						<!-- end section sort -->
+					</div>
+				</div>
+
+				<!-- grid -->
+				<transition-group name="fadex" class="row row--grid" tag="div">
+					<div class="col-12 col-sm-6 col-lg-4" v-for="(item, index) in items" v-if="currentFilter === item.category || currentFilter === 'all'" :key="item.id">
+						<div class="product">
+							<div class="product__img">
+								<img :src="item.image" alt="">
+							</div>
+							<h3 class="product__title">{{ item.title }}</h3>
+							<span class="product__price">${{ item.price | formatCurrency }}</span>
+							<button @click="addToCart(item)" class="product__add" type="button">
+								<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'><path d='M448,256c0-106-86-192-192-192S64,150,64,256s86,192,192,192S448,362,448,256Z' style='fill:none;stroke-miterlimit:10;stroke-width:32px'/><line x1='256' y1='176' x2='256' y2='336' style='fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/><line x1='336' y1='256' x2='176' y2='256' style='fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/></svg>
+							</button>
+						</div>
+					</div>
+				</transition-group>
+				<!-- grid -->
+			</div>
+		</section>
+		<!-- end section -->
+
+		<!-- section -->
+		<section class="section" id="cart">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<!-- section title -->
+						<h2 class="section__title">Cart ({{cartItems.length}})</h2>
+						<!-- end section title -->
+					</div>
+
+					<!-- cart -->
+					<cart inline-template :items="cartItems">
+						<div class="col-12">
+							<div class="cart">
+								<div class="table-responsive">
+									<table class="cart__table">
+										<thead>
+											<tr>
+												<th>Product</th>
+												<th>Title</th>
+												<th>In Stock</th>
+												<th>Quantity</th>
+												<th>Unit Price</th>
+												<th></th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr v-for="(item, index) in items" :key="item.id">
+												<td>
+													<div class="cart__img"><img :src="item.image" alt=""></div>
+												</td>
+												<td>{{item.title}}</td>
+												<td>{{item.stock}}</td>
+												<td>
+													<div class="cart__quantity">
+														<button @click="item.quantity--" :disabled="item.quantity < 2" type="button">
+															<i class="ion ion-ios-remove"></i>
+														</button>
+														<input type="text" v-model="item.quantity">
+														<button @click="item.quantity++" :disabled="item.quantity >= item.stock" type="button">
+															<i class="ion ion-ios-add"></i>
+														</button>
+													</div>
+												</td>
+												<td><span class="cart__price">${{item.price | formatCurrency}}</span></td>
+												<td><button @click="removeItem(index)" class="cart__delete" type="button"><svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'><line x1='368' y1='368' x2='144' y2='144' style='fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/><line x1='368' y1='144' x2='144' y2='368' style='fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/></svg></button></td>
+											</tr>
+
+											<tr v-show="items.length === 0">
+												<td colspan="6">
+													<p class="cart__empty">
+														Cart is empty
+													</p>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+								<div class="cart__info">
+									<div class="cart__total">
+										<p>Total:</p>
+										<span>${{Total | formatCurrency}}</span>
+									</div>
+
+									<div class="cart__systems">
+										<i class="pf pf-visa"></i>
+										<i class="pf pf-mastercard"></i>
+										<i class="pf pf-paypal"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</cart>
+					<!-- end cart -->
+				</div>
+			</div>
+		</section>
+		<!-- end section -->
+
+		<!-- section -->
+		<section class="section" id="checkout">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<!-- section title -->
+						<h2 class="section__title">Checkout</h2>
+						<!-- end section title -->
+					</div>
+
+					<!-- checkout -->
+					<div class="col-12 col-lg-8">
+						<form action="#" class="checkout">
+							<div class="row">
+								<div class="col-12 col-md-6">
+									<div class="form__group">
+										<input type="text" name="name" placeholder="John Doe">
+									</div>
+								</div>
+
+								<div class="col-12 col-md-6">
+									<div class="form__group">
+										<input type="email" name="email" placeholder="SofiyanPharma@template.buy">
+									</div>
+								</div>
+
+								<div class="col-12 col-md-6">
+									<div class="form__group">
+										<input type="text" name="phone" placeholder="+1 809 123-45-67">
+									</div>
+								</div>
+
+								<div class="col-12 col-md-6">
+									<div class="form__group form__group--select">
+										<select name="time">
+											<option value="" disabled selected>Time of delivery</option>
+											<option value="5:00pm - 6:00pm">5:00pm - 6:00pm</option>
+											<option value="6:00pm - 7:00pm">6:00pm - 7:00pm</option>
+											<option value="7:00pm - 8:00pm">7:00pm - 8:00pm</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-12">
+									<div class="form__group">
+										<textarea name="address" placeholder="Delivery address"></textarea>
+									</div>
+								</div>
+
+								<div class="col-12">
+									<button class="form__btn" type="button">Complete</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<!-- end checkout -->
+
+					<!-- contacts -->
+					<div class="col-12 col-lg-4">
+						<div class="contacts">
+							<h3 class="contacts__title">Free Shipping</h3>
+							<p class="contacts__text">Free shipping all over India <br> for prepaid orders</p>
+						</div>
+
+						<div class="contacts">
+							<h3 class="contacts__title"><a href="mailto:SofiyanPharma@supp.com">Supp@SofiyanPharma.com</a></h3>
+							<p class="contacts__text">Our contact E-mail</p>
+						</div>
+
+						<div class="contacts">
+							<h3 class="contacts__title contacts__title--phone"><a href="tel:88001234567">8 800 123 45 67</a></h3>
+							<p class="contacts__text">Free calls All over India <br>    </p>
+						</div>
+					</div>
+					<!-- end contacts -->
+				</div>
+			</div>
+		</section>
+		<!-- end section -->	
+
+		<!-- section -->
+		<section class="section" id="about">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<!-- section title -->
+						<h2 class="section__title">About <b>SofiyanPharma</b></h2>
+						<!-- end section title -->
+
+						<!-- section text -->
+						<p class="section__text">SofiyanPharma – Coronavirus Medical Prevention, Online Pharmacy its develops, produces, and markets pharmaceutical drugs for the use as medications to be administered to patients (or self-administered), with the aim to cure and prevent diseases, or alleviate symptoms.[1][2] Pharmaceutical companies may deal in generic or brand medications and medical devices. They are subject to a variety of laws and regulations that govern the patenting, testing, safety, efficacy using drug testing and marketing of drugs. The global pharmaceuticals market produced treatments worth $1,228.45 billion in 2020 and showed a compound annual growth rate (CAGR) of 1.8%</p>
+						<!-- end section text -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- end section -->
+
+		<!-- footer -->
+		<footer class="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="footer__content">
+							<h6 class="footer__copyright"><span>© SofiyanPharma, 2022—2023</span> Create by <a href="#" target="_blank">Shaikh sofiyan</a></h6>
+
+							<div class="footer__social">
+								<a class="facebook" href="#"><i class="ion ion-logo-facebook"></i></a>
+								<a class="instagram" href="#"><i class="ion ion-logo-instagram"></i></a>
+								<a class="twitter" href="#"><i class="ion ion-logo-twitter"></i></a>
+								<a class="vk" href="#"><i class="ion ion-logo-vk"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- end footer -->
+	</div>
+	<!-- end app -->
+
+	<!-- JS -->
+	<script src="js/vue.js"></script>
+	<script src="js/vue-scrollto.js"></script>
+	<script src="js/vue-toast-notification.js"></script>
+	<script src="js/products.js"></script>
+	<script src="js/main.js"></script>
+</body>
+	</tr>
+</table>
+
+</body>
+
+</html>
+
+
